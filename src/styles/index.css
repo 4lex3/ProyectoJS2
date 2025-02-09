@@ -103,3 +103,8 @@ input[type="submit"]:hover {
     font-family: "Arial", sans-serif;
     font-weight: bold;
 }
+
+.image-element {
+    width: 600px;
+    height: 300px;
+}
