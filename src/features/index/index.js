@@ -1,3 +1,4 @@
+import { AIService } from "../../core/services/Ai.service.js";
 import { CommunityService } from "../../core/services/community.service.js";
 import { ImageService } from "../../core/services/images.service.js";
 import { PopulationService } from "../../core/services/population.service.js";
@@ -14,6 +15,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const indexPage = new IndexComponent(communityService, populationService, provinceService, imageService);
     indexPage.loadOptions();
+
+
+
+    const aiService = new AIService(); 
+
+    // aiService.createDescription("Badalona");
+
+
 
 
 });
