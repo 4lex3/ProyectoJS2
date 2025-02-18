@@ -4,36 +4,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conociendo España</title>
+    <title>Descubre España</title>
     <link rel="stylesheet" href="./src/styles/index.css">
 </head>
+
 <body>
 
-    <h1>Descubre España</h1>
+
+    <div class="formContainer">
+        <h1 class="title">Descubre España !</h1>
 
 
-    <form action="">
+        <form action="">
 
-        <label>Comunidad: </label><select name="ccaa" id="ccaa">
-            <option value="" disabled selected>Selecciona una opción</option>
-        </select><br><br>
-
-
-        <label>Provincia: </label><select name="provincia" id="provincia">
-            <option value="" disabled selected>Selecciona una opción</option>
-        </select><br><br>
-
-        <label>Poblacion: </label><select name="poblacion" id="poblacion">
-            <option value="" disabled selected>Selecciona una opción</option>
-        </select><br><br>
-
-        <input type="submit" value="ENVIAR" id="submit">
-    </form>
+            <label>Comunidad: </label><select name="ccaa" id="ccaa">
+                <option value="" disabled selected>Selecciona una opción</option>
+            </select><br><br>
 
 
-    <div id="image-container"></div>
+            <label>Provincia: </label><select name="provincia" id="provincia">
+                <option value="" disabled selected>Selecciona una opción</option>
+            </select><br><br>
+
+            <label>Poblacion: </label><select name="poblacion" id="poblacion">
+                <option value="" disabled selected>Selecciona una opción</option>
+            </select><br><br>
+
+            <input class="buttonSubmit" type="submit" value="Se parte de la aventura" id="submit">
+        </form>
+
+    </div>
+
+
+    <div class="preferencesContainer" id="preferencesContainer">
+
+        <form action="">
+
+            <label>Comunidad: </label><select name="ccaa" id="ccaa">
+                <option value="" disabled selected>Selecciona una opción</option>
+            </select><br><br>
+
+
+            <label>Provincia: </label><select name="provincia" id="provincia">
+                <option value="" disabled selected>Selecciona una opción</option>
+            </select><br><br>
+
+            <label>Poblacion: </label><select name="poblacion" id="poblacion">
+                <option value="" disabled selected>Selecciona una opción</option>
+            </select><br><br>
+
+        </form>
+
+
+    </div>
+
+
 
 
 </body>
 <script type="module" src="./src/features/index/index.js"></script>
+
 </html>

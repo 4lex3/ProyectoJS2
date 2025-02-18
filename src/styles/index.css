@@ -1,13 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Oswald:wght@200..700&display=swap');
+
 body {
+
+    height: 100vh;
+    background: rgb(22, 22, 22);
+    font-family: "Oswald", serif;
+    color: #fff;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.formContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
-    font-family: 'Poppins', sans-serif;
+    height: 100%;
+    width: 50%;
+    background: rgb(22, 22, 22);
+    font-family: "Oswald", serif;
     color: #fff;
     height: auto;
+    padding: 5rem;
 }
 
 form {
@@ -15,7 +31,6 @@ form {
     padding: 20px;
     border-radius: 10px;
     backdrop-filter: blur(10px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     text-align: center;
 }
 
@@ -36,7 +51,8 @@ select {
 }
 
 select option{
-    color: black;
+    color: #fff;
+    background-color: #444;
 }
 
 select:hover {
@@ -44,15 +60,16 @@ select:hover {
 }
 
 input[type="submit"] {
-    background: #ff6f61;
+    background: #1d1d1d;
     color: white;
-    font-weight: bold;
+    font-weight: 500;
     cursor: pointer;
     transition: background 0.3s ease;
 }
 
 input[type="submit"]:hover {
-    background: #e65c50;
+    background: #fff;
+    color: #1d1d1d;
 }
 
 #image-container {
@@ -73,7 +90,7 @@ input[type="submit"]:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(53, 231, 255, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -100,11 +117,18 @@ input[type="submit"]:hover {
     font-size: 14px;
     color: #444;
     text-align: center;
-    font-family: "Arial", sans-serif;
     font-weight: bold;
 }
 
 .image-element {
     width: 600px;
     height: 300px;
+}
+
+.title {
+    font-weight: 300;
+}
+
+.preferencesContainer {
+    padding: 4rem;
 }

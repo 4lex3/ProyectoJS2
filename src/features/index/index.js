@@ -1,8 +1,8 @@
-import { AIService } from "../../core/services/Ai.service.js";
-import { CommunityService } from "../../core/services/community.service.js";
-import { ImageService } from "../../core/services/images.service.js";
-import { PopulationService } from "../../core/services/population.service.js";
-import { ProvincesService } from "../../core/services/province.service.js";
+import { CommunityService } from "../../core/services/api/community.service.js";
+import { ImageService } from "../../core/services/api/images.service.js";
+import { PopulationService } from "../../core/services/api/population.service.js";
+import { ProvincesService } from "../../core/services/api/province.service.js";
+import { VoiceService } from "../../core/services/voice/voice.service.js";
 
 
 
@@ -18,9 +18,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-    const aiService = new AIService(); 
+    const voiceService = new VoiceService();
+    voiceService.getAllVoices().then((voices) => {
 
-    // aiService.createDescription("Badalona");
+        // console.log(voices);
+        voiceService.talk(voices[0], "kristiano ronaldo junior")
+
+        
+        console.log(voiceService.filterSpanishVoices());
+    });
 
 
 
@@ -41,6 +47,7 @@ class IndexComponent {
     provinceInput;
     populationInput;
     imageContainer;
+
 
 
     constructor(communityService, populationService, provinceService, imageService) {
@@ -108,47 +115,54 @@ class IndexComponent {
         e.preventDefault();
 
         if(!this.populationInput.value){
-            if(!this.imageContainer.querySelector("p")) this.appendWarningElement("No se ha seleccionado poblacion");
+            this.appendWarningElement("No se ha seleccionado poblacion!");
             return;
         }
-    
-        this.imageContainer.innerHTML = "";
-        const population = this.populationInput.value;
-        const images = await this.imageService.getImagesByPopulation(population);
 
-        this.createImages(images);
+        document.getElementById("warningElement").remove();
+    
+        // this.imageContainer.innerHTML = "";
+        // const population = this.populationInput.value;
+        // const images = await this.imageService.getImagesByPopulation(population);
+
+        // this.createImages(images);
+
+        console.log("Redirigir")
 
     }
 
     appendWarningElement(message){
-        const waningEmptyPopulation = document.createElement("p");
-        waningEmptyPopulation.innerHTML = message;
-        this.imageContainer.append(waningEmptyPopulation);
+
+        const warningElement= document.createElement("p");
+        warningElement.innerHTML = message;
+        warningElement.id = "warningElement"
+
+        if(!document.getElementById("warningElement")) this.form.append(warningElement);
     }
 
-    createImages(images){
+    // createImages(images){
 
-        if (!("query" in images)){
-            this.appendWarningElement("No se encontraron imagenes");
-            return;
-        }
+    //     if (!("query" in images)){
+    //         this.appendWarningElement("No se encontraron imagenes");
+    //         return;
+    //     }
 
-        const imagesObjects = images.query.pages;
+    //     const imagesObjects = images.query.pages;
 
-        for (const item in imagesObjects) {
-            if (imagesObjects[item]?.imageinfo) {
-                const url = imagesObjects[item].imageinfo[0].url;
-                this.createImage(url);
-            } 
-        }
+    //     for (const item in imagesObjects) {
+    //         if (imagesObjects[item]?.imageinfo) {
+    //             const url = imagesObjects[item].imageinfo[0].url;
+    //             this.createImage(url);
+    //         } 
+    //     }
         
-    }
+    // }
 
-    createImage(src){
-        const img = document.createElement("img");
-        img.src = src;
-        img.classList.add("image-element");
-        this.imageContainer.append(img);
-    }
+    // createImage(src){
+    //     const img = document.createElement("img");
+    //     img.src = src;
+    //     img.classList.add("image-element");
+    //     this.imageContainer.append(img);
+    // }
 
 }
