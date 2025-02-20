@@ -8,41 +8,48 @@ export class VoiceService {
     }
 
     async getAllVoices() {
-        
-        if (this.voices.length > 0) {
-            return this.voices;  
-        }
-
         return new Promise((resolve, reject) => {
+
             const checkVoices = () => {
                 this.voices = this.synth.getVoices();
                 if (this.voices.length > 0) {
-                    resolve(this.voices);  
-
-                } else {
-                    reject('No voices found');  
+                    resolve(this.voices);
                 }
             };
 
-            if (this.synth.onvoiceschanged !== undefined) {
+            checkVoices();
+
+            if (this.voices.length === 0) {
+
                 this.synth.onvoiceschanged = checkVoices;
-            } else {
-                checkVoices();  
+
+                const interval = setInterval(() => {
+                    checkVoices();
+                    if (this.voices.length > 0) {
+                        clearInterval(interval);
+                        resolve(this.voices);
+                    }
+                }, 100);
+
+                setTimeout(() => {
+                    clearInterval(interval);
+                    if (this.voices.length === 0) {
+                        reject('No voices found after waiting');
+                    }
+                }, 3000); 
             }
         });
-
     }
 
-
     //! The selected voice is a type of voice object.
-    talk(selectedVoice, text){
+    talk(selectedVoice, text, rate = 1){
 
         const realtor = new SpeechSynthesisUtterance(text);
 
         realtor.voice = selectedVoice;
 
         //* Params
-        realtor.rate = 1;   
+        realtor.rate = rate;   
         realtor.pitch = 1;  
         realtor.volume = 1; 
 
@@ -75,5 +82,4 @@ export class VoiceService {
     }
 
     
-
 }

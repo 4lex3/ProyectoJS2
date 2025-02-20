@@ -1,4 +1,5 @@
 import { CommunityService } from "../../core/services/api/community.service.js";
+import { ImageService } from "../../core/services/api/images.service.js";
 import { PopulationService } from "../../core/services/api/population.service.js";
 import { ProvincesService } from "../../core/services/api/province.service.js";
 import { FormService } from "../../core/services/ui/Form.service.js";
@@ -11,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const communityService = new CommunityService();
     const populationService = new PopulationService();
     const provinceService = new ProvincesService();
+    const imageService = new ImageService();
 
     const voiceService = new VoiceService()
     const formService = new FormService(voiceService);
@@ -20,10 +22,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-    // voiceService.getAllVoices()
-    //     .then((voices) => {
-    //         console.log(voiceService.filterSpanishVoices());
-    //     });
+    // const voiceService = new VoiceService();
+    // voiceService.getAllVoices().then((voices) => {
+
+    //     // console.log(voices);
+    //     voiceService.talk(voices[0], "kristiano ronaldo junior")
+
+        
+    //     console.log(voiceService.filterSpanishVoices());
+    // });
+
+
 
 
 });
@@ -114,78 +123,19 @@ class IndexComponent {
             return;
         }
 
-        if(document.getElementById("warningElement")) document.getElementById("warningElement").remove()
+        document.getElementById("warningElement").remove();
+    
+        // this.imageContainer.innerHTML = "";
+        // const population = this.populationInput.value;
+        // const images = await this.imageService.getImagesByPopulation(population);
 
-        const preferenceFormStates = await this.formService.getFormState();
+        // this.createImages(images);
 
-        this.handleNextForm(preferenceFormStates)
+        console.log("Redirigir")
+        
+
 
     }
-
-
-
-    handleNextForm(formStates){
-
-        // const preferenceForm = document.getElementById("preferenceForm");
-        // preferenceForm.classList.add('preferenceVisible');
-
-        const preferenceContainer = document.getElementById("preferencesContainer");
-        const preferenceForm = this.createPreferenceForm(formStates[0].question, formStates[0].options); 
-
-        preferenceForm.addEventListener("change", () => this.handlePreferenceFormEvent(formStates));
-        preferenceContainer.append(preferenceForm);
-        setTimeout(() => preferenceForm.classList.add('preferenceVisible'), 100);
-
-    }
-
-
-    handlePreferenceFormEvent(formStates){
-        const allULs = preferenceForm.querySelectorAll('ul');
-        allULs.forEach(ul => ul.classList.remove('active'));
-
-        const selectedOption = preferenceForm.querySelector('input[name="voice"]:checked');
-        const selectedOptionUL= selectedOption.nextElementSibling.children[0];
-        selectedOptionUL.classList.toggle('active');
-
-        const selectedOptionValue = formStates[0].options.find(state => state.name === selectedOption.id);
-        selectedOptionValue.talkExample();
-    }
-
-    createPreferenceForm(question, options) {
-
-        const form = document.createElement('form');
-        form.id = 'preferenceForm';
-        form.classList.add('preferenceForm');
-
-        const title = document.createElement('h3');
-        title.textContent = question;
-        form.append(title);
-
-        const optionContainer = document.createElement('div');
-        optionContainer.className = 'option-container';
-
-        options.forEach(option => {
-
-            const input = document.createElement('input');
-
-            input.type = 'radio';
-            input.id = option.name;
-            input.name = 'voice';
-            input.value = option;
-
-            const label = document.createElement('label');
-            label.htmlFor = option.name;
-            label.innerHTML = option.voiceHTML;
-
-            optionContainer.append(input);
-            optionContainer.append(label);
-        });
-
-        form.append(optionContainer);
-        return form;
-    }
-
-
 
     appendWarningElement(message){
 
@@ -195,5 +145,30 @@ class IndexComponent {
 
         if(!document.getElementById("warningElement")) this.form.append(warningElement);
     }
+
+    // createImages(images){
+
+    //     if (!("query" in images)){
+    //         this.appendWarningElement("No se encontraron imagenes");
+    //         return;
+    //     }
+
+    //     const imagesObjects = images.query.pages;
+
+    //     for (const item in imagesObjects) {
+    //         if (imagesObjects[item]?.imageinfo) {
+    //             const url = imagesObjects[item].imageinfo[0].url;
+    //             this.createImage(url);
+    //         } 
+    //     }
+        
+    // }
+
+    // createImage(src){
+    //     const img = document.createElement("img");
+    //     img.src = src;
+    //     img.classList.add("image-element");
+    //     this.imageContainer.append(img);
+    // }
 
 }
