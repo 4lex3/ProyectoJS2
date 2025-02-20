@@ -314,3 +314,8 @@ label:hover {
         transform: scaleY(0.5);
     }
 }
+
+svg {
+    height: 5rem;
+    width: 5rem;
+}

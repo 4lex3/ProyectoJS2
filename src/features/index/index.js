@@ -19,6 +19,12 @@ document.addEventListener("DOMContentLoaded", () => {
     indexPage.loadOptions();
 
 
+    // TODO - Manejar eventos de cambio de formulario
+    // TODO - Validar la creacion de formularios 
+    // TODO - Implementar documentacion
+    // TODO - Setear Cookie token
+    // TODO - Setear local storage 
+    // TODO - Redireccionar a la siguiente pagina
 
     // voiceService.getAllVoices()
     //     .then((voices) => {
@@ -67,7 +73,7 @@ class IndexComponent {
 
         const populations = await this.populationService.getAllPopulations();
 
-        this.form.addEventListener("submit", this.handleSubmit.bind(this));
+        this.form.addEventListener("submit", this.handlePopulationForm.bind(this));
 
     }
 
@@ -105,7 +111,7 @@ class IndexComponent {
         this.setOptionsList(this.populationInput, populationOptions); 
     }
 
-    async handleSubmit(e){
+    async handlePopulationForm(e){
 
         e.preventDefault();
 
@@ -116,30 +122,46 @@ class IndexComponent {
 
         if(document.getElementById("warningElement")) document.getElementById("warningElement").remove()
 
+        if(document.getElementById("preferenceForm")) {
+            this.appendWarningElement("Ya existe un formulario activo");
+            return
+        } 
+
         const preferenceFormStates = await this.formService.getFormState();
-
-        this.handleNextForm(preferenceFormStates)
-
+        this.handleVoiceForm(preferenceFormStates)
     }
 
 
 
-    handleNextForm(formStates){
-
-        // const preferenceForm = document.getElementById("preferenceForm");
-        // preferenceForm.classList.add('preferenceVisible');
+    handleVoiceForm(formStates){
 
         const preferenceContainer = document.getElementById("preferencesContainer");
-        const preferenceForm = this.createPreferenceForm(formStates[0].question, formStates[0].options); 
+        const voiceForm = this.createPreferenceForm(formStates[0].question, formStates[0].options); 
 
-        preferenceForm.addEventListener("change", () => this.handlePreferenceFormEvent(formStates));
-        preferenceContainer.append(preferenceForm);
-        setTimeout(() => preferenceForm.classList.add('preferenceVisible'), 100);
+        voiceForm.addEventListener("change", () => this.onChangePreferenceForm(formStates));
+        voiceForm.addEventListener("dblclick", () => this.handleNextForm(formStates[1], voiceForm))
 
+        preferenceContainer.append(voiceForm);
+        setTimeout(() => voiceForm.classList.add('preferenceVisible'), 100);
+    }
+
+    handleNextForm(formState, preferenceForm){
+
+        preferenceForm.remove();
+
+        const preferenceContainer = document.getElementById("preferencesContainer");
+        const speedForm = this.createPreferenceForm(formState.question, formState.options);
+
+        const selectedOption = preferenceForm.querySelector('input[name="voice"]:checked');
+
+
+        preferenceContainer.append(speedForm)
+        setTimeout(() => speedForm.classList.add('preferenceVisible'), 100);
     }
 
 
-    handlePreferenceFormEvent(formStates){
+    onChangePreferenceForm(preferenceState){
+
         const allULs = preferenceForm.querySelectorAll('ul');
         allULs.forEach(ul => ul.classList.remove('active'));
 
@@ -147,9 +169,28 @@ class IndexComponent {
         const selectedOptionUL= selectedOption.nextElementSibling.children[0];
         selectedOptionUL.classList.toggle('active');
 
-        const selectedOptionValue = formStates[0].options.find(state => state.name === selectedOption.id);
+        const selectedOptionValue = preferenceState[0].options.find(state => state.name === selectedOption.id);
         selectedOptionValue.talkExample();
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     createPreferenceForm(question, options) {
 
@@ -166,6 +207,7 @@ class IndexComponent {
 
         options.forEach(option => {
 
+            console.log(option)
             const input = document.createElement('input');
 
             input.type = 'radio';
@@ -175,7 +217,7 @@ class IndexComponent {
 
             const label = document.createElement('label');
             label.htmlFor = option.name;
-            label.innerHTML = option.voiceHTML;
+            label.innerHTML = option.htmlElement;
 
             optionContainer.append(input);
             optionContainer.append(label);
@@ -184,7 +226,6 @@ class IndexComponent {
         form.append(optionContainer);
         return form;
     }
-
 
 
     appendWarningElement(message){
