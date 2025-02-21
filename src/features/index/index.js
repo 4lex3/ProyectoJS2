@@ -1,6 +1,7 @@
 import { CommunityService } from "../../core/services/api/community.service.js";
 import { PopulationService } from "../../core/services/api/population.service.js";
 import { ProvincesService } from "../../core/services/api/province.service.js";
+import { CookiesService } from "../../core/services/cookies/cookies.service.js";
 import { FormService } from "../../core/services/ui/Form.service.js";
 import { VoiceService } from "../../core/services/voice/voice.service.js";
 
@@ -18,13 +19,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const indexPage = new IndexComponent(communityService, populationService, provinceService, formService);
     indexPage.loadOptions();
 
+    const box = document.getElementById('expanding-box');
 
-    // TODO - Manejar eventos de cambio de formulario
-    // TODO - Validar la creacion de formularios 
+    box.addEventListener('click', () => {
+        box.classList.toggle('expanded');
+    });
+
+    //* - Validar la creacion de formularios 
+    //*- Manejar eventos de cambio de formulario
+
     // TODO - Implementar documentacion
     // TODO - Setear Cookie token
-    // TODO - Setear local storage 
-    // TODO - Redireccionar a la siguiente pagina
+    //* TODO - Setear local storage 
+    //* TODO - Redireccionar a la siguiente pagina
 
     // voiceService.getAllVoices()
     //     .then((voices) => {
@@ -41,6 +48,7 @@ class IndexComponent {
     populationService;
     provinceService;
     formService;
+    cookiesService;
 
     //? DOMProperties:
     form; 
@@ -61,6 +69,8 @@ class IndexComponent {
         this.populationInput = document.getElementById("poblacion");
         this.imageContainer = document.getElementById("image-container");
         this.formService = formService;
+        this.cookiesService = new CookiesService();
+        this.cookiesService.setCookie('textAI', 'AIzaSyCA2MWb5J0y3ekMxNLJ--kaECd_ECSQf-Q')
     }
 
     async loadOptions() {
@@ -145,15 +155,19 @@ class IndexComponent {
         setTimeout(() => voiceForm.classList.add('preferenceVisible'), 100);
     }
 
-    handleNextForm(formState, preferenceForm){
+    handleNextForm(speedState, voiceForm){
 
-        preferenceForm.remove();
+        voiceForm.remove();
 
         const preferenceContainer = document.getElementById("preferencesContainer");
-        const speedForm = this.createPreferenceForm(formState.question, formState.options);
+        const speedForm = this.createPreferenceForm(speedState.question, speedState.options);
 
-        const selectedOption = preferenceForm.querySelector('input[name="voice"]:checked');
+        speedForm.addEventListener("change", () => {
 
+            const selectedOption = speedForm.querySelector('input[name="voice"]:checked');
+            localStorage.setItem('Speed', selectedOption.id);
+            window.location.replace('../../../src/pages/interactive.html')
+        });
 
         preferenceContainer.append(speedForm)
         setTimeout(() => speedForm.classList.add('preferenceVisible'), 100);
@@ -169,28 +183,11 @@ class IndexComponent {
         const selectedOptionUL= selectedOption.nextElementSibling.children[0];
         selectedOptionUL.classList.toggle('active');
 
-        const selectedOptionValue = preferenceState[0].options.find(state => state.name === selectedOption.id);
-        selectedOptionValue.talkExample();
+        const stateSelected = preferenceState[0].options.find(state => state.name === selectedOption.id);
+        localStorage.setItem('Voice', stateSelected.name);
+
+        stateSelected.talkExample();
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     createPreferenceForm(question, options) {
 
@@ -207,7 +204,6 @@ class IndexComponent {
 
         options.forEach(option => {
 
-            console.log(option)
             const input = document.createElement('input');
 
             input.type = 'radio';

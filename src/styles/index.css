@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Oswald:wght@200..700&display=swap');
 
+
 body {
 
-    height: 100vh;
+    height: 100vh !important;
     background: rgb(22, 22, 22);
     font-family: "Oswald", serif;
     color: #fff;
@@ -18,7 +19,6 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100%;
     width: 40vw;
     background: rgb(22, 22, 22);
     font-family: "Oswald", serif;
@@ -318,4 +318,74 @@ label:hover {
 svg {
     height: 5rem;
     width: 5rem;
+}
+
+/* * Documentacion */
+
+.box {
+    margin: 3rem;
+    min-width: 100%;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    cursor: pointer;
+    padding: 16px;
+    text-align: center;
+}
+
+.box.expanded {
+    padding: 1.5rem;
+    background-color: rgb(53, 53, 53);
+    height: 300px;
+    width: 100%;
+    overflow: scroll;
+    text-align: start;
+    overflow-x: hidden;
+}
+
+.boxTitle {
+    text-decoration: underline;
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.box.expanded .hidden {
+    display: block;
+    margin-top: 10px;
+}
+
+.lightbulb {
+    width: 30px;
+    height: 30px;
+}
+
+::-webkit-scrollbar {
+    width: 3px;
+}
+
+::-webkit-scrollbar-track {
+    background: #444;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #272727;
+}
+
+
+
+code {
+    margin: 0.5rem;
+    background-color: #797979;
+    color: rgb(69, 255, 162);
+    padding: 0.2rem;
+    border-radius: 4px;
 }

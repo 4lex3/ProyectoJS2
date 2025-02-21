@@ -33,10 +33,124 @@
             <input class="buttonSubmit" type="submit" value="Se parte de la aventura" id="submit">
         </form>
 
+        <div id="expanding-box" class="box">
+            <svg class="lightbulb" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
+            </svg>
+
+            <p class="hidden boxTitle">Formulario de Poblacion:</p>
+
+            <p class="hidden">1. Carga inicial de opciones:</p>
+            <p class="hidden">Al cargar la página, se obtienen todas las comunidades autónomas y se rellenan las
+                opciones del <code>&lt;select&gt;</code> correspondiente (ccaa).</p>
+
+            <p class="hidden">2. Manejo de eventos de cambio:</p>
+            <p class="hidden">Cuando el usuario selecciona una comunidad autónoma, se dispara un evento
+                <code>change</code> en el <code>&lt;select&gt;</code> de comunidades (ccaa). Este evento llama a un
+                manejador (<code>communityInputHandler</code>) que obtiene las provincias correspondientes a la
+                comunidad seleccionada y rellena el <code>&lt;select&gt;</code> de provincias (provincia).
+            </p>
+
+            <p class="hidden">3. Relleno de provincias:</p>
+            <p class="hidden">Similar al paso anterior, cuando el usuario selecciona una provincia, se obtiene la lista
+                de poblaciones correspondientes y se rellena el <code>&lt;select&gt;</code> de poblaciones (poblacion).
+            </p>
+
+            <p class="hidden">4. Envío del formulario:</p>
+            <p class="hidden">Al enviar el formulario, se valida que se haya seleccionado una población. Si no se ha
+                seleccionado, se muestra una advertencia. Si se ha seleccionado una población, se pueden realizar
+                acciones adicionales como mostrar imágenes o generar descripciones.</p>
+
+
+            <p class="hidden boxTitle">Formulario de Preferencias de usuario:</p>
+
+            <ol class="hidden">
+                <li><strong>Servicios Importados</strong>:
+                    <ul class="hidden">
+                        <li>Se importan varios servicios, incluyendo <code class="hidden">CommunityService</code>, <code
+                                class="hidden">PopulationService</code>, <code class="hidden">ProvincesService</code>,
+                            <code class="hidden">CookiesService</code>, <code class="hidden">FormService</code> y <code
+                                class="hidden">VoiceService</code>.</li>
+                    </ul>
+                </li>
+
+                <li><strong>Inicialización de Servicios</strong>:
+                    <ul class="hidden">
+                        <li>Se crean instancias de los servicios necesarios, como <code
+                                class="hidden">CommunityService</code>, <code class="hidden">PopulationService</code>,
+                            <code class="hidden">ProvincesService</code>, <code class="hidden">VoiceService</code> y
+                            <code class="hidden">FormService</code>.</li>
+                    </ul>
+                </li>
+
+                <li><strong>Configuración de Cookies</strong>:
+                    <ul class="hidden">
+                        <li>Se utiliza el <code class="hidden">CookiesService</code> para setear un token en las cookies
+                            del navegador:</li>
+                        <pre class="hidden"><code class="hidden">this.cookiesService = new CookiesService();
+this.cookiesService.setCookie('textAI', 'AIzaSyCA2MWb5J0y3ekMxNLJ--kaECd_ECSQf-Q');</code></pre>
+                    </ul>
+                </li>
+
+                <li><strong>Carga de Opciones</strong>:
+                    <ul class="hidden">
+                        <li>Se cargan las opciones iniciales para los selectores de comunidad, provincia y población
+                            mediante llamadas a los servicios correspondientes:</li>
+                        <pre class="hidden"><code class="hidden">const communities = await this.communityService.getAllCommunities();
+this.setOptionsList(this.communityInput, communities);
+
+const provinces = await this.provinceService.getAllProvinces();
+this.communityInput.addEventListener("change", this.communityInputHandler.bind(this));
+
+const populations = await this.populationService.getAllPopulations();</code></pre>
+                    </ul>
+                </li>
+
+                <li><strong>Manejo de Eventos</strong>:
+                    <ul class="hidden">
+                        <li>Se manejan eventos de cambio en los selectores para actualizar las opciones disponibles en
+                            función de la selección del usuario:</li>
+                        <pre class="hidden"><code class="hidden">this.communityInput.addEventListener("change", this.communityInputHandler.bind(this));
+this.form.addEventListener("submit", this.handlePopulationForm.bind(this));</code></pre>
+                    </ul>
+                </li>
+
+                <li><strong>Formulario de Preferencias</strong>:
+                    <ul class="hidden">
+                        <li>Se crea un formulario de preferencias para seleccionar la voz y la velocidad de narración.
+                            Las opciones de voz se obtienen mediante el <code class="hidden">VoiceService</code> y se
+                            filtran para obtener solo las voces en español:</li>
+                        <pre
+                            class="hidden"><code class="hidden">this.formState[0].options = this.voiceService.filterSpanishVoices();</code></pre>
+                    </ul>
+                </li>
+
+                <li><strong>Almacenamiento en LocalStorage</strong>:
+                    <ul class="hidden">
+                        <li>La voz seleccionada y la velocidad se guardan en el <code class="hidden">localStorage</code>
+                            del navegador:</li>
+                        <pre class="hidden"><code class="hidden">localStorage.setItem('Voice', stateSelected.name);
+localStorage.setItem('Speed', selectedOption.id);</code></pre>
+                    </ul>
+                </li>
+
+                <li><strong>Uso de la API de Speech</strong>:
+                    <ul class="hidden">
+                        <li>Se utiliza la API de Speech del navegador para reproducir ejemplos de voz y para la
+                            narración:</li>
+                        <pre
+                            class="hidden"><code class="hidden">voice.talkExample = () => this.voiceService.talk(voice, "Hola, yo sere tu guia en esta aventura!");</code></pre>
+                    </ul>
+                </li>
+            </ol>
+
+        </div>
     </div>
 
 
-    <div class="preferencesContainer" id="preferencesContainer" ></div>
+    <div class="preferencesContainer boxTitle" id="preferencesContainer"></div>
 
 
 

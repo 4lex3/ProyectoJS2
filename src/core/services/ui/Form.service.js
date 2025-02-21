@@ -64,7 +64,7 @@ export class FormService {
         `
 
         this.formState[0].options.map( voice => {
-            voice.talkExample = () => this.voiceService.talk(voice, "Hola, mucho gusto conocerte");
+            voice.talkExample = () => this.voiceService.talk(voice, "Hola, yo sere tu guia en esta aventura!");
             voice.htmlElement = voiceHTML;
         });
     }
