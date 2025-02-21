@@ -166,7 +166,7 @@ class IndexComponent {
 
             const selectedOption = speedForm.querySelector('input[name="voice"]:checked');
             localStorage.setItem('Speed', selectedOption.id);
-            window.location.replace('../../../src/pages/interactive.html')
+            window.location.replace('./src/pages/interactive.html');
         });
 
         preferenceContainer.append(speedForm)
