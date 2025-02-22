@@ -58,6 +58,7 @@ class IndexComponent {
         this.cookiesService = new CookiesService();
         this.cookiesService.setCookie('textAIKey', 'AIzaSyCA2MWb5J0y3ekMxNLJ--kaECd_ECSQf-Q')
         this.cookiesService.setCookie('multimediaAIKey', '7d7876d6-650d-4450-9a06-9578070e32ef')
+
     }
 
     async loadOptions() {
@@ -69,8 +70,8 @@ class IndexComponent {
         this.communityInput.addEventListener("change", this.communityInputHandler.bind(this));
 
         const populations = await this.populationService.getAllPopulations();
-
         this.form.addEventListener("submit", this.handlePopulationForm.bind(this));
+        this.populationInput.addEventListener("change", (e) => localStorage.setItem("population", e.target.value));
 
     }
 
@@ -90,6 +91,8 @@ class IndexComponent {
         }
 
         selectInput.append(...newOptions);
+        selectInput.value = newOptions[0].value;
+        selectInput.dispatchEvent(new Event("change"));
     }
 
     communityInputHandler(e){

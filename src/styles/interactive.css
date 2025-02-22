@@ -53,7 +53,7 @@ body {
 
 .textAiContainer {
     width: 50%;
-    padding: 1rem;
+    padding: rem;
     border-radius: 5px;
     background-color: rgb(37, 37, 37);
     height: 500px;
@@ -62,10 +62,29 @@ body {
     font-size: 1.3rem;
 }
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.textAI {
+  animation: fadeIn 1s ease-in-out;
+}
+
+
 .controls {
     display: flex;
     gap: 2rem;
     flex-wrap: wrap;
+}
+
+.time-svg {
+    width: 1rem;
+    height: 1rem;
 }
 
 .option {
@@ -74,7 +93,16 @@ body {
     padding: 0.3rem 0.7rem;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
 }
+
+
+
+
+
 
 label:has(input[type="radio"]:hover) {
     border-color: rgb(176, 255, 127);
@@ -125,6 +153,13 @@ label:has(input[type="radio"]:checked) {
 
   animation: spin 2s linear infinite;
 }
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 
 @keyframes spin {
   0% {
@@ -234,6 +269,11 @@ label:has(input[type="radio"]:checked) {
 .copy-button svg {
     width: 1rem;
     height: 1rem;
+
+}
+
+.copy-active {
+  background-color: #82b69e;
 }
 
 

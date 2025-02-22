@@ -18,26 +18,28 @@
                 src="https://static.nationalgeographic.es/files/styles/image_3200/public/nationalgeographic_1468962.webp?w=1600&h=900"
                 alt="">
 
-            <div class="textAiContainer">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, esse error. Numquam esse nulla dolores
-                    accusamus odio eveniet beatae tenetur officia quia consequatur, voluptas incidunt quo, provident
-                    praesentium distinctio cum.
-                
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, officiis? Rem blanditiis, vero saepe ex reprehenderit iste neque, corporis aut animi consectetur, sed nobis velit laudantium. Nemo tempora maxime ipsa.
-                
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam atque corporis ea at explicabo! Facere velit nam mollitia adipisci neque natus architecto, itaque sapiente ipsa quam dolores incidunt, ut ratione!
+            <div class="textAiContainer spinner" id="textAiContainer">
 
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, ducimus culpa natus, hic laborum eius sit quisquam rem consequuntur commodi, porro dolor blanditiis aut assumenda dolorum accusamus aliquam illum ipsa!
-                
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sint voluptatibus perferendis molestias commodi aliquam excepturi maxime iusto iure, odio blanditiis architecto quisquam explicabo nemo est quis? Sed ipsam commodi molestias?
-                
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, quia? Dignissimos, vero minus qui quae voluptatibus ducimus laudantium corrupti nisi, laborum explicabo in harum, id magnam ad quia. Natus, et.
-                
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis facilis ab nostrum. Possimus quis, voluptates accusantium eaque rem aspernatur distinctio quidem sapiente voluptas ipsum, adipisci, illo deserunt? Molestias, magni optio?
-                
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto reiciendis id quis non esse exercitationem atque tempora minima in sint, alias unde reprehenderit facilis, dolorem modi magnam officia mollitia quae!
-                
-                </p>
+                <svg id="spinner" class="loader" viewBox="0 0 384 384" xmlns="http://www.w3.org/2000/svg">
+                <circle
+                    class="active"
+                    pathLength="360"
+                    fill="transparent"
+                    stroke-width="32"
+                    cx="192"
+                    cy="192"
+                    r="176"
+                ></circle>
+                <circle
+                    class="track"
+                    pathLength="360"
+                    fill="transparent"
+                    stroke-width="32"
+                    cx="192"
+                    cy="192"
+                    r="176"
+                ></circle>
+                </svg> 
             </div>
 
         </div>
@@ -46,18 +48,23 @@
         <form class="controls" id="time-control">
 
             <label class="option">
-                <input type="radio" name="selection" hidden checked>
-                <span>Opción 1</span>
+                <input type="radio" value="past" name="selection" hidden checked>
+                <span>Pasado</span>
+                <svg class="time-svg" fill="#ffffff" viewBox="0 0 24 24" id="Outline" xmlns="http://www.w3.org/2000/svg" style="--darkreader-inline-fill: var(--darkreader-background-ffffff, #181a1b);" data-darkreader-inline-fill=""><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><title>194 restore</title> <path d="M12,6a1,1,0,0,0-1,1v5a1,1,0,0,0,.293.707l3,3a1,1,0,0,0,1.414-1.414L13,11.586V7A1,1,0,0,0,12,6Z M23.812,10.132A12,12,0,0,0,3.578,3.415V1a1,1,0,0,0-2,0V5a2,2,0,0,0,2,2h4a1,1,0,0,0,0-2H4.827a9.99,9.99,0,1,1-2.835,7.878A.982.982,0,0,0,1,12a1.007,1.007,0,0,0-1,1.1,12,12,0,1,0,23.808-2.969Z"></path></g></svg>
             </label>
 
             <label class="option">
-                <input type="radio" name="selection" hidden>
-                <span>Opción 2</span>
+                <input type="radio"value="present" name="selection" hidden>
+                <span>Presente</span>
+                <svg class="time-svg" fill="#ffffff" viewBox="0 0 24 24" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" style="--darkreader-inline-fill: var(--darkreader-background-ffffff, #181a1b);" data-darkreader-inline-fill=""><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M12,0A12,12,0,1,0,24,12,12.013,12.013,0,0,0,12,0ZM22,12a10,10,0,0,1-.186,1.9l-1.932-.58a7.442,7.442,0,0,0,0-2.64l1.932-.58A10,10,0,0,1,22,12Zm-.76-3.816-1.93.579A8.048,8.048,0,0,0,15.237,4.69l.579-1.93A10.058,10.058,0,0,1,21.24,8.184ZM12,18a6,6,0,1,1,6-6A6.006,6.006,0,0,1,12,18ZM13.9,2.186l-.58,1.932a7.442,7.442,0,0,0-2.64,0L10.1,2.186a9.8,9.8,0,0,1,3.8,0ZM8.184,2.76l.579,1.93A8.048,8.048,0,0,0,4.69,8.763L2.76,8.184A10.058,10.058,0,0,1,8.184,2.76ZM2,12a10,10,0,0,1,.186-1.9l1.932.58a7.442,7.442,0,0,0,0,2.64l-1.932.58A10,10,0,0,1,2,12Zm.76,3.816,1.93-.579A8.048,8.048,0,0,0,8.763,19.31l-.579,1.93A10.058,10.058,0,0,1,2.76,15.816Zm7.34,6,.58-1.932a7.442,7.442,0,0,0,2.64,0l.58,1.932a9.8,9.8,0,0,1-3.8,0Zm5.716-.575-.579-1.929a8.048,8.048,0,0,0,4.073-4.073l1.93.579A10.053,10.053,0,0,1,15.816,21.239ZM14.631,10.892a1.848,1.848,0,0,1,0,2.216l-1.893,2.523a.922.922,0,0,1-1.476,0L9.369,13.108a1.848,1.848,0,0,1,0-2.216l1.893-2.523a.922.922,0,0,1,1.476,0Z"></path></g></svg>
+
             </label>
 
             <label class="option">
-                <input type="radio" name="selection" hidden>
-                <span>Opción 3</span>
+                <input type="radio" value="future" name="selection" hidden>
+                <span>Futuro</span>
+                <svg class="time-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff" style="--darkreader-inline-stroke: var(--darkreader-text-ffffff, #e8e6e3);" data-darkreader-inline-stroke=""><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="0.768" style="--darkreader-inline-stroke: var(--darkreader-text-cccccc, #c8c3bc);" data-darkreader-inline-stroke=""></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M1 12C1 6.47715 5.47715 2 11 2C16.3868 2 20.7788 6.25933 20.9919 11.5939L22.2929 10.2929C22.6834 9.90237 23.3166 9.90237 23.7071 10.2929C24.0976 10.6834 24.0976 11.3166 23.7071 11.7071L20.7071 14.7071C20.5196 14.8946 20.2652 15 20 15C19.7348 15 19.4804 14.8946 19.2929 14.7071L16.2929 11.7071C15.9024 11.3166 15.9024 10.6834 16.2929 10.2929C16.6834 9.90237 17.3166 9.90237 17.7071 10.2929L18.9889 11.5747C18.7678 7.35413 15.2756 4 11 4C6.58172 4 3 7.58172 3 12C3 16.4183 6.58172 20 11 20C13.5127 20 15.7544 18.8427 17.2226 17.0283C17.57 16.599 18.1997 16.5326 18.629 16.88C19.0584 17.2274 19.1248 17.8571 18.7774 18.2864C16.9457 20.5499 14.1418 22 11 22C5.47715 22 1 17.5228 1 12ZM12 6C12 5.44772 11.5523 5 11 5C10.4477 5 10 5.44772 10 6V12C10 12.2652 10.1054 12.5196 10.2929 12.7071L13.2929 15.7071C13.6834 16.0976 14.3166 16.0976 14.7071 15.7071C15.0976 15.3166 15.0976 14.6834 14.7071 14.2929L12 11.5858V6Z" fill="#ffffff" style="--darkreader-inline-fill: var(--darkreader-background-ffffff, #181a1b);" data-darkreader-inline-fill=""></path> </g></svg>
+
             </label>
 
             <div class="option copy-button" id="copy-button">
@@ -65,10 +72,12 @@
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 7.5V6.108c0-1.135.845-2.098 1.976-2.192.373-.03.748-.057 1.123-.08M15.75 18H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08M15.75 18.75v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5A3.375 3.375 0 0 0 6.375 7.5H5.25m11.9-3.664A2.251 2.251 0 0 0 15 2.25h-1.5a2.251 2.251 0 0 0-2.15 1.586m5.8 0c.065.21.1.433.1.664v.75h-6V4.5c0-.231.035-.454.1-.664M6.75 7.5H4.875c-.621 0-1.125.504-1.125 1.125v12c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V16.5a9 9 0 0 0-9-9Z" />
                 </svg>
-
             </div>
+
         </form>
 
+<!-- ?Loader -->
+ 
 <!-- <svg class="loader" viewBox="0 0 384 384" xmlns="http://www.w3.org/2000/svg">
   <circle
     class="active"
@@ -88,8 +97,7 @@
     cy="192"
     r="176"
   ></circle>
-</svg>
- -->
+</svg> -->
 
     </main>
 

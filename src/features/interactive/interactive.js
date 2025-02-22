@@ -1,16 +1,179 @@
+import { MultimediaAIService } from "../../core/services/ai/multimediaAI.service.js";
+import { TextAIService } from "../../core/services/ai/textAi.service.js";
+import { CookiesService } from "../../core/services/cookies/cookies.service.js";
+
 document.addEventListener("DOMContentLoaded", () => {
 
-    
+    //? Services:
+    const cookiesService = new CookiesService();
+    const textAIKey = cookiesService.getCookie('textAIKey')
+    const textAI = new TextAIService(textAIKey);
 
+
+    //? Properties:
+    const population = localStorage.getItem('population');
+    const voice = localStorage.getItem('Voice');
+    const speed = localStorage.getItem('Speed');
+
+
+    //? Principal Class:
+    const interactivePage = new InteractivePage(population, voice, speed, textAI);
+    interactivePage.Init();
 
 
 });
 
+
 class InteractivePage {
-    constructor(parameters) {
+
+    //? Properties and states:
+    population;
+    voice;
+    speed;
+    aiState = {
+        past: {
+            imgElement: "", 
+            description: ""
+        },
+        present: {
+            imgElement: "", 
+            description: ""
+
+        },
+        future: {
+            imgElement: "", 
+            description: ""
+        }
+    };
+
+    //? Services:
+    textAiService;
+
+    //? DOM Properties:
+    copyButton;
+    imageContainer;
+    spinner;
+    timeForm;
+
+
+
+    constructor(population, voice, speed, textAiService) {
+
+        this.population = population;
+        this.voice = voice;
+        this.speed = speed
+
+        this.textAiService = textAiService;
+
+        this.copyButton = document.getElementById("copy-button");
+        this.imageContainer = document.getElementById("aiContainer");
+        this.textAiContainer = document.getElementById("textAiContainer");
+        this.spinner = document.getElementById("spinner");
+        this.timeForm = document.getElementById("time-control");
+
+
+
+    }
+
+
+    async Init(){
+
+        this.copyButton.addEventListener("click", this.CopyHandler.bind(this));
+
+        this.timeForm.addEventListener("change",  this.timeHandler.bind(this));
+        this.timeForm.dispatchEvent(new Event("change"));
+
+
         
     }
+
+    
+    timeHandler(e){
+
+        const selectedOption = this.timeForm.querySelector('input[name="selection"]:checked');
+
+
+        console.log(selectedOption.value);
+        this.insertDescription(selectedOption.value);
+
+
+
+    } 
+
+
+
+    async insertDescription(time) {
+        if (!this.textAiContainer.querySelector('svg')) {
+            this.textAiContainer.classList.add("spinner");
+            this.textAiContainer.innerHTML = "";
+            this.textAiContainer.append(this.spinner);
+        }
+
+        // const description = await this.textAiService.createDescription(this.population, time);
+
+        const description = "lorem askdjsaaaaajjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj aksdjalkda sdjaslkdnak jd jasd jakl djaklsjd jasjdj kalsj dakslj dakdjakdjakldjaskldjakjdkasjdja jdlasjkldjasdlakjldjajkldjaj daskj daklsdj akls djasd jaklsjdk lasj daklsdj akl jasd" 
+
+        this.textAiContainer.classList.remove("spinner");
+        this.textAiContainer.innerHTML = ""; 
+
+        const descriptionElement = document.createElement("p");
+        descriptionElement.classList.add("textAI");
+        this.textAiContainer.append(descriptionElement);
+
+        const words = description.split(" ");
+        words.forEach((word, index) => {
+            setTimeout(() => {
+                descriptionElement.textContent += word + " ";
+            }, index * 50); 
+        });
+    }
+
+    CopyHandler(e){
+
+        const copyButton = e.target;
+
+        copyButton.classList.add("copy-active");
+        setTimeout(() => copyButton.classList.remove('copy-active'), 500);
+
+        if(!this.textAiContainer.querySelector('p')){
+            navigator.clipboard.writeText('Text no copiado!');
+            return;
+        }
+
+        navigator.clipboard.writeText(this.textAiContainer.textContent);
+
+    }
+
 }
+
+
+
+    // async insertDescription(time){
+
+    //     if(!this.textAiContainer.querySelector('svg')){
+    //         this.textAiContainer.classList.add("spinner");
+    //         this.textAiContainer.innerHTML = "";
+    //         this.textAiContainer.append(this.spinner);
+    //     }
+
+    //     const description = await this.textAiService.createDescription(this.population, time);
+
+    //     const descriptionElement = document.createElement("p");
+
+
+
+
+
+
+        // descriptionElement.textContent = description;
+        // this.textAiContainer.classList.remove("spinner");
+
+        // this.textAiContainer.innerHTML = "";
+        // this.textAiContainer.append(descriptionElement);
+
+    // }
+
+
 
 
 
