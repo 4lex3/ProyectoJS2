@@ -1,0 +1,241 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Oswald:wght@200..700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+    font-family: "Oswald", serif;
+    color: #fff;
+    font-weight: 300;
+}
+
+h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+
+body {
+    background: rgb(22, 22, 22);
+    width: 100vw;
+    padding: 2rem;
+}
+
+.main {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 2rem;
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.aiContainer {
+    border-radius: 10px;
+    background-color: rgb(24, 22, 34); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
+    flex-wrap: wrap;
+}
+
+.aiImage {
+    width: 45%;
+    border-radius: 5px;
+}
+
+.textAiContainer {
+    width: 50%;
+    padding: 1rem;
+    border-radius: 5px;
+    background-color: rgb(37, 37, 37);
+    height: 500px;
+    overflow: scroll;
+    overflow-x: hidden;
+    font-size: 1.3rem;
+}
+
+.controls {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.option {
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    padding: 0.3rem 0.7rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+label:has(input[type="radio"]:hover) {
+    border-color: rgb(176, 255, 127);
+}
+
+label:has(input[type="radio"]:checked) {
+    border-color: rgb(195, 150, 255);
+}
+
+
+/* ? Scroll */
+.textAiContainer::-webkit-scrollbar {
+    width: 8px; 
+}
+.textAiContainer::-webkit-scrollbar-track {
+    background: #333; 
+    border-radius: 10px;
+}
+
+.textAiContainer::-webkit-scrollbar-thumb {
+    background: rgb(182, 127, 255); 
+    border-radius: 10px;
+    transition: background 0.3s ease;
+}
+
+.textAiContainer::-webkit-scrollbar-thumb:hover {
+    background: rgb(182, 127, 255); 
+}
+
+.textAiContainer {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(182, 127, 255) #333;
+}
+
+/* ? Spinner  */
+
+.loader {
+  width: 48px;
+
+  overflow: visible;
+  transform: rotate(-90deg);
+  transform-origin: center;
+
+  --active: #7627a3;
+  --track: #f2d4fe;
+
+  --duration: 8s;
+
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    rotate: 0deg;
+  }
+
+  100% {
+    rotate: 360deg;
+  }
+}
+
+.active {
+  stroke: var(--active);
+  stroke-linecap: round;
+  stroke-dashoffset: 360;
+  animation: active-animation var(--duration) ease-in-out infinite;
+}
+
+@keyframes active-animation {
+  0% {
+    stroke-dasharray: 0 0 0 360 0 360;
+  }
+  12.5% {
+    stroke-dasharray: 0 0 270 90 270 90;
+  }
+  25% {
+    stroke-dasharray: 0 270 0 360 0 360;
+  }
+  37.5% {
+    stroke-dasharray: 0 270 270 90 270 90;
+  }
+  50% {
+    stroke-dasharray: 0 540 0 360 0 360;
+  }
+  50.001% {
+    stroke-dasharray: 0 180 0 360 0 360;
+  }
+  62.5% {
+    stroke-dasharray: 0 180 270 90 270 90;
+  }
+  75% {
+    stroke-dasharray: 0 450 0 360 0 360;
+  }
+  87.5% {
+    stroke-dasharray: 0 450 270 90 270 90;
+  }
+  87.501% {
+    stroke-dasharray: 0 90 270 90 270 90;
+  }
+  100% {
+    stroke-dasharray: 0 360 1 360 0 360;
+  }
+}
+
+.track {
+  stroke: var(--track);
+  stroke-linecap: round;
+  stroke-dashoffset: 360;
+  animation: track-animation var(--duration) ease-in-out infinite;
+}
+
+@keyframes track-animation {
+  0% {
+    stroke-dasharray: 0 20 320 40 320 40;
+  }
+  12.5% {
+    stroke-dasharray: 0 290 50 310 50 310;
+  }
+  25% {
+    stroke-dasharray: 0 290 320 40 320 40;
+  }
+  37.5% {
+    stroke-dasharray: 0 560 50 310 50 310;
+  }
+  37.501% {
+    stroke-dasharray: 0 200 50 310 50 310;
+  }
+  50% {
+    stroke-dasharray: 0 200 320 40 320 40;
+  }
+  62.5% {
+    stroke-dasharray: 0 470 50 310 50 310;
+  }
+  62.501% {
+    stroke-dasharray: 0 110 50 310 50 310;
+  }
+  75% {
+    stroke-dasharray: 0 110 320 40 320 40;
+  }
+  87.5% {
+    stroke-dasharray: 0 380 50 310 50 310;
+  }
+  100% {
+    stroke-dasharray: 0 380 320 40 320 40;
+  }
+}
+
+/* ?  Copy */
+.copy-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: 40vw;
+}
+
+
+.copy-button svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+
+/* ?  Doc  */
+

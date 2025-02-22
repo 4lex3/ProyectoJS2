@@ -25,20 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
         box.classList.toggle('expanded');
     });
 
-    //* - Validar la creacion de formularios 
-    //*- Manejar eventos de cambio de formulario
-
-    // TODO - Implementar documentacion
-    // TODO - Setear Cookie token
-    //* TODO - Setear local storage 
-    //* TODO - Redireccionar a la siguiente pagina
-
-    // voiceService.getAllVoices()
-    //     .then((voices) => {
-    //         console.log(voiceService.filterSpanishVoices());
-    //     });
-
-
 });
 
 class IndexComponent {
@@ -70,7 +56,8 @@ class IndexComponent {
         this.imageContainer = document.getElementById("image-container");
         this.formService = formService;
         this.cookiesService = new CookiesService();
-        this.cookiesService.setCookie('textAI', 'AIzaSyCA2MWb5J0y3ekMxNLJ--kaECd_ECSQf-Q')
+        this.cookiesService.setCookie('textAIKey', 'AIzaSyCA2MWb5J0y3ekMxNLJ--kaECd_ECSQf-Q')
+        this.cookiesService.setCookie('multimediaAIKey', '7d7876d6-650d-4450-9a06-9578070e32ef')
     }
 
     async loadOptions() {

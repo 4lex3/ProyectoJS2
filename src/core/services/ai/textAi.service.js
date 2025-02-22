@@ -1,9 +1,17 @@
-export class AIService {
+export class TextAIService {
 
 
-    apiKey = "AIzaSyCA2MWb5J0y3ekMxNLJ--kaECd_ECSQf-Q";
-    baseUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${this.apiKey}`;
-    
+    //? Text AI
+    textAIKey;
+    textAIUrl= `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${this.textAIKey}`;
+
+
+   
+
+    constructor(textAIKey){
+        this.textAIKey = textAIKey;
+    }
+
     
     async createDescription(population){
 
@@ -47,7 +55,7 @@ export class AIService {
 
         console.log("Obteniendo respuesta a AI...");
 
-        const res = await fetch(this.baseUrl, {
+        const res = await fetch(this.textAIUrl, {
 
             method: 'POST',
             headers: {
