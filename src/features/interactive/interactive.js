@@ -155,18 +155,16 @@ class InteractivePage {
 
     }
 
-    async insertImage(time){
-
+    async insertImage(time) {
         const imageLoader = this.spinner.cloneNode(true);
         imageLoader.classList.add("loader_image");
 
-        if(!this.imageContainer.querySelector("svg")){
+        if (!this.imageContainer.querySelector("svg") && !this.imageContainer.querySelector("img")) {
             this.imageContainer.prepend(imageLoader);
         }
 
-        if(this.imageContainer.querySelector('img')){
-            this.imageContainer.querySelector('img').remove()
-        } 
+        const existingImages = this.imageContainer.querySelectorAll("img");
+        existingImages.forEach(img => img.remove());
 
         const description = this.aiState[time].description;
 
@@ -181,6 +179,7 @@ class InteractivePage {
         imageLoader.remove();
         this.imageContainer.prepend(img);
     }
+
 
 
     CopyHandler(e){
