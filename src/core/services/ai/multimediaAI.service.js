@@ -26,7 +26,7 @@ export class MultimediaAIService {
 
         }
 
-        const prompt = this.createPrompt('present', population, description);
+        const prompt = this.createPrompt(time, population, description);
         const url = await this.generateImage(prompt);
 
         return url;

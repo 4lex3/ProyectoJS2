@@ -56,8 +56,8 @@ class IndexComponent {
         this.imageContainer = document.getElementById("image-container");
         this.formService = formService;
         this.cookiesService = new CookiesService();
-        this.cookiesService.setCookie('textAIKey', 'AIzaSyCA2MWb5J0y3ekMxNLJ--kaECd_ECSQf-Q')
-        this.cookiesService.setCookie('multimediaAIKey', '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')
+        this.cookiesService.setCookie('textAIKey', 'AIzaSyCA2MWb5J0y3ekMxNLJ--kaECd_ECSQf-Q');
+        this.cookiesService.setCookie('multimediaAIKey', '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');
 
     }
 

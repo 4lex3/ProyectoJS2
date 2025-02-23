@@ -42,41 +42,44 @@ export class VoiceService {
                     if (this.voices.length === 0) {
                         reject('No voices found after waiting');
                     }
-                }, 3000); 
+                }, 3000);
             }
         });
     }
 
     //! The selected voice is a type of voice object.
-    talk(selectedVoice, text, rate = 1){
+    talk(selectedVoice, text, rate = 1) {
+        try {
+            if (this.synth.speaking) {
+                this.synth.cancel();
+            }
 
-        if (this.synth.speaking) {
-            this.synth.cancel(); 
+            const realtor = new SpeechSynthesisUtterance(text);
+            realtor.voice = selectedVoice;
+
+            //* Params
+            realtor.rate = rate;
+            realtor.pitch = 1;
+            realtor.volume = 1;
+
+            // Hablar
+            this.synth.speak(realtor);
+        } catch (error) {
+            console.error("Error en la síntesis de voz:", error);
         }
-
-        const realtor = new SpeechSynthesisUtterance(text);
-
-        realtor.voice = selectedVoice;
-
-        //* Params
-        realtor.rate = rate;   
-        realtor.pitch = 1;  
-        realtor.volume = 1; 
-
-
-        this.synth.speak(realtor);
     }
 
 
-    filterSpanishVoices(){
+
+    filterSpanishVoices() {
 
         const matches = ['español', 'ESPAÑOL', 'Español', 'Spanish', 'spanish'];
 
-        const spanishVoices = this.voices.filter(voice => 
+        const spanishVoices = this.voices.filter(voice =>
             matches.some(match => voice.lang.toLowerCase().includes(match) || voice.name.toLowerCase().includes(match))
         );
 
-        
+
         const sortedVoices = spanishVoices.sort((voiceA, voiceB) => {
 
             const googleA = voiceA.name.toLowerCase().includes('google');
@@ -85,11 +88,11 @@ export class VoiceService {
             if (googleA && !googleB) return -1;
             if (!googleA && googleB) return 1;
 
-            return 0;  
+            return 0;
         });
 
         return sortedVoices;
     }
 
-    
+
 }
