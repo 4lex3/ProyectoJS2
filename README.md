@@ -1,3 +1,6 @@
+### **HOLA ALBERT, EXISTE UN PROBLEMA CON LA APIKEY, EN CASO DE QUE NO VAYA ME LA COMENTAS Y LA RENUEVO. Ademas, esto solo funciona en Firefox
+
+
 # ProyectoJS2
 - El proyecto busca promover la cultura, donde tu le ingresas una localidad de España y este te guia haciendote una presentacion con speech y con imagenes de la localidad dada. 
 
