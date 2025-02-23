@@ -283,3 +283,74 @@ label:has(input[type="radio"]:checked) {
 
 /* ?  Doc  */
 
+.box {
+    min-width: 100%;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    cursor: pointer;
+    padding: 16px;
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.box.expanded {
+    padding: 1.5rem;
+    background-color: rgb(53, 53, 53);
+    height: 700px;
+    width: 100%;
+    overflow: scroll;
+    text-align: start;
+    overflow-x: hidden;
+}
+
+.boxTitle {
+    text-decoration: underline;
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.box.expanded .hidden {
+    display: block;
+    margin-top: 10px;
+}
+
+.lightbulb {
+    width: 30px;
+    height: 30px;
+}
+
+::-webkit-scrollbar {
+    width: 3px;
+}
+
+::-webkit-scrollbar-track {
+    background: #444;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #272727;
+}
+
+
+
+code {
+    margin: 0.5rem;
+    background-color: #797979;
+    color: rgb(69, 255, 162);
+    padding: 0.2rem;
+    border-radius: 4px;
+}
+
+.margin-left {
+  margin-left: 3rem;
+}

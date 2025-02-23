@@ -18,16 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const voiceService = new VoiceService();
 
 
-    // multimediaAIService.createPopulationImage("present", "asdasd", "Caracteristicas")
-    //     .then((url) => {
-
-    //         const img = document.createElement("img");
-    //         img.src = url;
-
-    //         document.body.append(img);
-    //     });
-
-
     //? Properties:
     const population = localStorage.getItem('population');
     const voice = localStorage.getItem('Voice');
@@ -38,6 +28,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const interactivePage = new InteractivePage(population, voice, speed, textAI, multimediaAIService, voiceService);
     interactivePage.Init();
     
+    const box = document.getElementById('expanding-box');
+
+    box.addEventListener('click', () => {
+        box.classList.toggle('expanded');
+    });
+
+
 
 });
 
@@ -122,16 +119,13 @@ class InteractivePage {
     async insertElements(time) {
 
         if (!this.textAiContainer.querySelector('svg')) {
+            console.log("paso");
             this.textAiContainer.classList.add("spinner");
             this.textAiContainer.innerHTML = "";
             this.textAiContainer.append(this.spinner);
         }
 
-        // const description = this.aiState[time].description === "" ? await this.textAiService.createDescription(this.population, time) : this.aiState[time].description;
-
-        // const description = "Estamos en tiempo " + time + "asdj askdjaslkdj aad aksjdkas jas jasd askdakj kaskdk jaskdjasd asdjklaj klaskd asjkdj kada klasjkjd askldjkas kjdsakjd klajd kasjklda jkkdasjsakk askjdakslj klasjdka jdjas kdj aksjdkas ljdkl aj";
-
-
+        const description = this.aiState[time].description === "" ? await this.textAiService.createDescription(this.population, time) : this.aiState[time].description;
 
         this.aiState[time].description = description;
 

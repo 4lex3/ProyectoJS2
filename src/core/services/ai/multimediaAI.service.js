@@ -27,43 +27,39 @@ export class MultimediaAIService {
         }
 
         const prompt = this.createPrompt('present', population, description);
-        // const url = await this.generateImage(prompt);
-        const url = await this.imageAPIService.getImagesByPopulation('barcelona');
-
-        // const url = "https://static.nationalgeographic.es/files/styles/image_3200/public/nationalgeographic_1468962.webp?w=1600&h=900";
+        const url = await this.generateImage(prompt);
 
         return url;
-
         
     }
 
 
 
-    // async generateImage(prompt){
+    async generateImage(prompt){
 
 
 
-    //     const res = await fetch(this.baseURL, {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'Authorization': `Bearer ${this.apiKey}` 
-    //         },
-    //         body: JSON.stringify({ inputs: prompt })
-    //     });
+        const res = await fetch(this.baseURL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.apiKey}` 
+            },
+            body: JSON.stringify({ inputs: prompt })
+        });
 
-    //     if(!res.ok) {
-    //         const errorText = await res.text(); 
-    //         throw new Error(`Error al generar imagen: ${res.status} - ${errorText}`);
-    //     } 
+        if(!res.ok) {
+            const errorText = await res.text(); 
+            throw new Error(`Error al generar imagen: ${res.status} - ${errorText}`);
+        } 
 
-    //     const buffer = await res.arrayBuffer();
-    //     const base64Image = this.bufferToBase64(buffer);
-    //     const src = `data:image/png;base64,${base64Image}`
+        const buffer = await res.arrayBuffer();
+        const base64Image = this.bufferToBase64(buffer);
+        const src = `data:image/png;base64,${base64Image}`
 
-    //     return src;
+        return src;
 
-    // }
+    }
 
 
     bufferToBase64(buffer) {
