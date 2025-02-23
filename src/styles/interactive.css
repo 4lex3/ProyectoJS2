@@ -53,7 +53,7 @@ body {
 
 .textAiContainer {
     width: 50%;
-    padding: rem;
+    padding: 1rem;
     border-radius: 5px;
     background-color: rgb(37, 37, 37);
     height: 500px;
@@ -276,6 +276,10 @@ label:has(input[type="radio"]:checked) {
   background-color: #82b69e;
 }
 
+
+.loader_image {
+  width: 40%;
+}
 
 /* ?  Doc  */
 

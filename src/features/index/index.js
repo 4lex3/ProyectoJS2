@@ -57,7 +57,7 @@ class IndexComponent {
         this.formService = formService;
         this.cookiesService = new CookiesService();
         this.cookiesService.setCookie('textAIKey', 'AIzaSyCA2MWb5J0y3ekMxNLJ--kaECd_ECSQf-Q')
-        this.cookiesService.setCookie('multimediaAIKey', '7d7876d6-650d-4450-9a06-9578070e32ef')
+        this.cookiesService.setCookie('multimediaAIKey', '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')
 
     }
 

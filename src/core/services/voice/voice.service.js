@@ -2,6 +2,12 @@ export class VoiceService {
 
     synth;
     voices = [];
+    speeds = {
+        'Lento': 0.8,
+        'Normal': 1,
+        'Rapido': 1.2
+    }
+
 
     constructor() {
         this.synth = window.speechSynthesis;
@@ -43,6 +49,10 @@ export class VoiceService {
 
     //! The selected voice is a type of voice object.
     talk(selectedVoice, text, rate = 1){
+
+        if (this.synth.speaking) {
+            this.synth.cancel(); 
+        }
 
         const realtor = new SpeechSynthesisUtterance(text);
 
