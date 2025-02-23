@@ -26,6 +26,7 @@ export class MultimediaAIService {
 
         }
 
+        console.log(`Generando imagen de ${population} en el ${time}`);
         const prompt = this.createPrompt(time, population, description);
         const url = await this.generateImage(prompt);
 
